@@ -1,6 +1,9 @@
-const { gql } = require('apollo-server-express')
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
+  directive @upper on FIELD_DEFINITION
+  directive @auth on FIELD_DEFINITION
+
   type User {
     email: String!
     username: String!
@@ -14,7 +17,8 @@ const typeDefs = gql`
   }
 
   type Query {
-    foo: String
+    foo: String @auth
+    currentUser: User @auth
   }
 
   input LoginInput {
@@ -32,6 +36,6 @@ const typeDefs = gql`
     login(user: LoginInput): UserPayload
     createUser(user: CreateUserInput): UserPayload
   }
-`
+`;
 
-module.exports = typeDefs
+module.exports = typeDefs;
