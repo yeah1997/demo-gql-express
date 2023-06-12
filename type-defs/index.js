@@ -30,7 +30,7 @@ const typeDefs = gql`
     article: Article
   }
 
-  type ArticlePayload {
+  type ArticlesPayload {
     articles: [Article!]
     articlesCount: Int!
   }
@@ -42,7 +42,7 @@ const typeDefs = gql`
   type Query {
     foo: String @auth
     currentUser: User @auth
-    articles(offset: Int = 0, limit: Int = 3): ArticlePayload
+    articles(offset: Int = 0, limit: Int = 3): ArticlesPayload
   }
 
   input LoginInput {
