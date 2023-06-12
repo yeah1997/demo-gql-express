@@ -10,6 +10,24 @@ const typeDefs = gql`
     token: String
     bio: String
     image: String
+    following: Boolean
+  }
+
+  type Article {
+    _id: String!
+    title: String!
+    description: String!
+    body: String!
+    tagList: [String!]
+    createdAt: String!
+    updatedAt: String!
+    favorited: Boolean
+    favoritesCount: Int
+    author: User
+  }
+
+  type CreateArticlePayload {
+    article: Article
   }
 
   type UserPayload {
@@ -40,10 +58,21 @@ const typeDefs = gql`
     image: String
   }
 
+  input createArticleInput {
+    title: String!
+    description: String!
+    body: String!
+    tagList: [String!]
+  }
+
   type Mutation {
+    # User
     login(user: LoginInput): UserPayload
     createUser(user: CreateUserInput): UserPayload
     updateUser(user: updateUserInput): UserPayload @auth
+
+    # Article
+    createArticle(article: createArticleInput): CreateArticlePayload @auth
   }
 `;
 

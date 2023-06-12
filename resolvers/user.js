@@ -3,8 +3,7 @@ const jwt = require("../util/jwt");
 const { jwtSecret } = require("../config/config.default");
 const md5 = require("../util/md5");
 
-const resolvers = {
-  // 所有的 Query 都走这里
+module.exports = {
   Query: {
     foo(parent, args, context, info) {
       console.log(user);
@@ -51,10 +50,10 @@ const resolvers = {
     },
     async login(parent, { user }, { dataSources }) {
       const usersSources = dataSources.users;
-      // username is valiable?
+      // username is variable?
       const userRet = await usersSources.findByEmail(user.email);
       if (!userRet) throw new UserInputError("Email is not correct");
-      // password is valiable?
+      // password is variable?
 
       if (md5(user.password) !== userRet.password)
         throw new UserInputError("Password is not correct");
@@ -87,4 +86,3 @@ const resolvers = {
     },
   },
 };
-module.exports = resolvers;
