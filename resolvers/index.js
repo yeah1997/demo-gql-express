@@ -76,6 +76,15 @@ const resolvers = {
         },
       };
     },
+
+    async updateUser(parent, { user: userInput }, { user, dataSources }) {
+      if (userInput.password) userInput.password = md5(userInput.password);
+      const ret = await dataSources.users.updateUser(user._id, userInput);
+
+      return {
+        user: ret,
+      };
+    },
   },
 };
 module.exports = resolvers;

@@ -32,9 +32,18 @@ const typeDefs = gql`
     password: String!
   }
 
+  input updateUserInput {
+    email: String
+    username: String
+    password: String
+    bio: String
+    image: String
+  }
+
   type Mutation {
     login(user: LoginInput): UserPayload
     createUser(user: CreateUserInput): UserPayload
+    updateUser(user: updateUserInput): UserPayload @auth
   }
 `;
 
